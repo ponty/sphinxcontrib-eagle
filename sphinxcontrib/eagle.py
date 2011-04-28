@@ -26,28 +26,35 @@ image_id = 0
 class EagleImageDirective(parent):
     option_spec = parent.option_spec.copy()
     option_spec.update(dict(
-#                       prompt=flag,
                        palette=directives.unchanged,
                        resolution=directives.unchanged,
-                       timeout=directives.unchanged,
+                       timeout=directives.nonnegative_int,
+                       mirror=directives.flag,
+                       layers=directives.unchanged,
+                       command=directives.unchanged,
                        ))
     def run(self):
         palette = self.options.get('palette', 'white')
         resolution = self.options.get('resolution', 150)
         timeout = self.options.get('timeout', 20)
+        command = self.options.get('command', None)
         
-        #visible = 'visible' in self.options
+        mirror = 'mirror' in self.options
         
+        layers = self.options.get('layers', None)
+        if layers:
+            layers = layers.split(',')
+
         fname_sch = str(self.arguments[0])
         fname_sch = Path(fname_sch).expand().absolute()
         
         global image_id        
-        fname_img = '%s.%s.png' % (fname_sch.name, str(image_id))
+        fname_img = '%s_%s.png' % (fname_sch.name.replace('.','_'), str(image_id))
         image_id += 1
         fname_img_abs = Path(self.src).parent.child(fname_img)
         images_to_delete.append(fname_img_abs)
 
-        export_image(fname_sch, fname_img_abs, palette=palette, resolution=resolution, timeout=timeout)
+        export_image(fname_sch, fname_img_abs, palette=palette, resolution=resolution, timeout=timeout, layers=layers, mirror=mirror, command=command)
         
         self.arguments[0] = fname_img
         x = parent.run(self)
