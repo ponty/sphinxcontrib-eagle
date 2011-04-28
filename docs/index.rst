@@ -1,8 +1,7 @@
 .. default-domain:: rst
 .. highlight:: rest
 
-This Sphinx_ 1.0 extension executes programs during the build step and
-includes their screenshot into the documentation.
+This Sphinx_ 1.0 extension includes image or partlist of eagle_ schematic or board.
 
 
 Table of Contents

@@ -99,12 +99,11 @@ if ALL_TASKS_LOADED:
                                      '*.gz' , 
                                      'nosetests.xml', 
                                      'sloccount.sc', 
-                                     '*.pdf', 
+                                     '*.pdf','*.tex', 
                                      '*.png',
                                      ]
     
     options.paved.dist.manifest.include.remove('distribute_setup.py')
-    
     
     @task
     @needs('sloccount', 'html', 'pdf', 'sdist', 'nose')

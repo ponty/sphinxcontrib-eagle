@@ -23,7 +23,7 @@ Basic usage
 How it works
 ========================
 
-#. export image or text by eagexp_
+#. export image or text by eagle_ using eagexp_
 #. include image or text into documentation
 
 
@@ -33,16 +33,14 @@ Installation
 General
 --------
 
+ * install eagle_
  * install setuptools_
  * install PyVirtualDisplay_ , xvfb_ , xephyr_ (optional for background processing)
- * install eagexp_:
+ * install eagexp_
+ * install the program::
 
     # as root
     easy_install https://github.com/ponty/eagexp/zipball/master
-
- * install the program:
-
-    # as root
     easy_install https://github.com/ponty/sphinxcontrib-eagle/zipball/master
 
 
@@ -50,6 +48,7 @@ Ubuntu
 ----------
 ::
 
+    sudo apt-get install eagle
     sudo apt-get install python-setuptools
 
     # optional for background processing

@@ -2,14 +2,6 @@
 Usage
 ======
 
-widths : integer [, integer...]
-    A comma- or space-separated list of relative column widths. The default is equal-width columns (100%/#columns).
-    
-header : CSV data
-    Supplemental data for the table header, added independently of and before any header-rows from the main CSV data. Must use the same CSV format as the main CSV data.
-        
-
-           
 
 Configuration
 ---------------
@@ -20,29 +12,41 @@ Add ``sphinxcontrib.eagle`` to ``extensions`` list in ``conf.py``::
 		              'sphinxcontrib.eagle',
 		              ]
 
-Basic
--------
+Directives
+------------
 
-The main directive is `eagle`::
+There are 2 directives, they accept a single string as argument, 
+which is the path to the eagle .sch or .brd file::  
 
-    .. directive:: eagle
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+            :scale: 30%
 
-This directive accepts a single string as argument, which is the command
-to execute.  ::
+      .. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+
+
+The above snippet would render like this:
+
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+            :scale: 30%
+
+      .. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+
+
+The same for a board:: 
 
       .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+
+      .. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.brd
 
 The above snippet would render like this:
 
       .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
 
-
-image export
---------------
+      .. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.brd
 
 
-Options
-^^^^^^^^
+Image options
+---------------------
 
 --------------
 timeout
@@ -123,6 +127,58 @@ The above snippet would render like this:
          :palette:   colored
          :scale: 30 %
 
+--------------
+layers
+--------------
+
+Using the option ``layers`` you can diaplay or hide layers. 
+Check eagle documentation for valid settings. 
+ 
+
+Example::
+
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+         :layers:   via,pads
+
+The above snippet would render like this:
+
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+         :layers:   via,pads
+
+--------------
+mirror
+--------------
+
+Using the option ``mirror`` you can mirror the image. 
+ 
+
+Example::
+
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+         :mirror:   
+
+The above snippet would render like this:
+
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+         :mirror:   
+
+--------------
+command
+--------------
+
+Using the option ``command`` you can apply eagle commands. 
+ 
+
+Example::
+
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+         :command:   display none dimension
+
+The above snippet would render like this:
+
+      .. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+         :command:   display none dimension
+
 ------------------------
 scale, alt
 ------------------------
@@ -184,19 +240,8 @@ The above snippet would render like this:
            :align: right
 
 
-partlist export
------------------
-
-Eagle_ partlist export is included as table:
-
-      .. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
-
-The above snippet would render like this:
-
-      .. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
-
-Options
-^^^^^^^^
+Partlist options
+-------------------------
 
 ---------------
 raw
@@ -219,7 +264,7 @@ The above snippet would render like this:
 header
 ---------------
 
-Eagle_ partlist export is included as table::
+A comma-separated list of selected column names::
 
       .. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
            :header: part, value

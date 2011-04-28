@@ -1,8 +1,6 @@
 from path import path
 from setuptools import find_packages
 import logging
-import sys
-import os
 
 def read_project_version(py=None, where='.', exclude=['bootstrap', 'pavement', 'doc', 'docs', 'test', 'tests', ]):
     if not py:
@@ -57,6 +55,12 @@ def setup(app):
     app.add_description_unit('confval', 'confval',
                              'pair: %s; configuration value')
 
+
+# latex build settings
+latex_documents = [
+    ('index', '%s.tex' % project, u'%s Documentation' % project,
+    author, 'manual'),
+]
 
 # remove blank pages from pdf
 # http://groups.google.com/group/sphinx-dev/browse_thread/thread/92e19267d095412d/d60dcba483c6b13d
