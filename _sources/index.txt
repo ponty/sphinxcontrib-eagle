@@ -3,6 +3,7 @@
 
 This Sphinx_ 1.0 extension includes image or partlist of eagle_ schematic or board.
 
+**PDF documentation**: `sphinxcontrib-eagle.pdf <sphinxcontrib-eagle.pdf>`_
 
 Table of Contents
 ------------------------
