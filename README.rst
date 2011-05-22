@@ -1,5 +1,5 @@
 This Sphinx_ 1.0 extension exports 
-eagle_ partlist or image of schematic or board
+eagle_ partlist or image (2D/3D) of schematic or board
 during the build step and
 includes them into the documentation.
 
@@ -7,7 +7,6 @@ includes them into the documentation.
 Links:
  * home: https://github.com/ponty/sphinxcontrib-eagle
  * documentation: http://ponty.github.com/sphinxcontrib-eagle
- * pdf documentation: https://github.com/ponty/sphinxcontrib-eagle/raw/master/docs/_build/latex/sphinxcontrib-eagle.pdf
 
 Basic usage
 ============
@@ -16,6 +15,8 @@ Basic usage
     .. eagle-image:: singlesided.sch
          :resolution: 100
          :scale: 30 %
+
+    .. eagle-image3d:: singlesided.brd
 
     .. eagle-partlist:: singlesided.sch
            :header: part, value
@@ -34,8 +35,9 @@ General
 --------
 
  * install eagle_
+ * install povray_ (optional for 3D)
  * install setuptools_
- * install PyVirtualDisplay_ , xvfb_ , xephyr_ (optional for background processing)
+ * install pyvirtualdisplay_ , xvfb_ , xephyr_ (optional for background processing)
  * install eagexp_
  * install the program::
 
@@ -49,6 +51,7 @@ Ubuntu
 ::
 
     sudo apt-get install eagle
+    sudo apt-get install povray
     sudo apt-get install python-setuptools
 
     # optional for background processing
@@ -71,7 +74,7 @@ Uninstall
 .. _pip: http://pip.openplans.org/
 .. _Xvfb: http://en.wikipedia.org/wiki/Xvfb
 .. _Xephyr: http://en.wikipedia.org/wiki/Xephyr
-.. _PyVirtualDisplay: https://github.com/ponty/PyVirtualDisplay
+.. _pyvirtualdisplay: https://github.com/ponty/PyVirtualDisplay
 .. _eagle: http://www.cadsoftusa.com/
 .. _eagexp: https://github.com/ponty/eagexp
 

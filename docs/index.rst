@@ -1,8 +1,7 @@
-.. default-domain:: rst
-.. highlight:: rest
+**sphinxcontrib-eagle**
 
-This Sphinx_ 1.0 extension includes image or partlist of eagle_ schematic or board.
-
+:Date: |today|
+:PDF: `sphinxcontrib-eagle.pdf <sphinxcontrib-eagle.pdf>`_
 
 Table of Contents
 ------------------------
@@ -12,6 +11,7 @@ Table of Contents
 
    readme
    usage
+   dev
 
 .. _Sphinx: http://sphinx.pocoo.org/latest
 .. _eagle: http://www.cadsoftusa.com/
