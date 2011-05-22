@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Usage &mdash; sphinxcontrib-eagle v0.0.0 documentation</title>
+    <title>Usage &mdash; sphinxcontrib-eagle v0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="sphinxcontrib-eagle v0.0.0 documentation" href="index.html" />
+    <link rel="top" title="sphinxcontrib-eagle v0.0.1 documentation" href="index.html" />
+    <link rel="next" title="Development" href="dev.html" />
     <link rel="prev" title="About" href="readme.html" /> 
   </head>
   <body>
@@ -33,9 +34,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="dev.html" title="Development"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="readme.html" title="About"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">sphinxcontrib-eagle v0.0.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">sphinxcontrib-eagle v0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -57,131 +61,19 @@
 </div>
 <div class="section" id="directives">
 <h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
-<p>There are 2 directives, they accept a single string as argument,
-which is the path to the eagle .sch or .brd file:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.sch
-      :scale: 30%
+<p>There are 3 directives, they accept a single string as argument,
+which is the path to the eagle .sch or .brd file.
+3D is available only for board:</p>
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
 
-.. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch</pre>
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+
+.. eagle-partlist:: ~/.eagle/projects/examples/tutorial/demo2.brd</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/singlesided_sch_0.png"><img alt="_images/singlesided_sch_0.png" src="_images/singlesided_sch_0.png" style="width: 321.6px; height: 470.1px;" /></a>
-<table border="1" class="docutils">
-<caption></caption>
-<colgroup>
-<col width="17%" />
-<col width="17%" />
-<col width="17%" />
-<col width="17%" />
-<col width="17%" />
-<col width="17%" />
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">part</th>
-<th class="head">value</th>
-<th class="head">device</th>
-<th class="head">package</th>
-<th class="head">library</th>
-<th class="head">sheet</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr><td>C1</td>
-<td>10u</td>
-<td>E2,5-6</td>
-<td>E2,5-6</td>
-<td>polcap</td>
-<td>1</td>
-</tr>
-<tr><td>C2</td>
-<td>10u</td>
-<td>E2,5-6</td>
-<td>E2,5-6</td>
-<td>polcap</td>
-<td>1</td>
-</tr>
-<tr><td>C3</td>
-<td>10n</td>
-<td>C-EU025-025X050</td>
-<td>C025-025X050</td>
-<td>rcl</td>
-<td>1</td>
-</tr>
-<tr><td>C4</td>
-<td>10n</td>
-<td>C-EU025-025X050</td>
-<td>C025-025X050</td>
-<td>rcl</td>
-<td>1</td>
-</tr>
-<tr><td>C5</td>
-<td>27p</td>
-<td>C2.5/2</td>
-<td>C2,5-2</td>
-<td>capacitor-wima</td>
-<td>1</td>
-</tr>
-<tr><td>C6</td>
-<td>27p</td>
-<td>C2.5/2</td>
-<td>C2,5-2</td>
-<td>capacitor-wima</td>
-<td>1</td>
-</tr>
-<tr><td>D1</td>
-<td>1N4148</td>
-<td>1N4148</td>
-<td>DO35-10</td>
-<td>diode</td>
-<td>1</td>
-</tr>
-<tr><td>IC1</td>
-<td>16F84</td>
-<td>PIC16F84AP</td>
-<td>DIL18</td>
-<td>microchip</td>
-<td>1</td>
-</tr>
-<tr><td>J1</td>
-<td>&nbsp;</td>
-<td>PINHD-1X20</td>
-<td>1X20</td>
-<td>PINHEAD</td>
-<td>1</td>
-</tr>
-<tr><td>Q1</td>
-<td>&nbsp;</td>
-<td>XTAL/S</td>
-<td>QS</td>
-<td>special</td>
-<td>1</td>
-</tr>
-<tr><td>R1</td>
-<td>2.2k</td>
-<td>R-EU_0207/10</td>
-<td>0207/10</td>
-<td>rcl</td>
-<td>1</td>
-</tr>
-<tr><td>U1</td>
-<td>78L05</td>
-<td>78LXXZ</td>
-<td>TO92</td>
-<td>linear</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<p>The same for a board:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
-
-.. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.brd</pre>
-</div>
-<p>The above snippet would render like this:</p>
-<blockquote>
-<div><img alt="_images/singlesided_brd_1.png" src="_images/singlesided_brd_1.png" />
+<div><img alt="_images/demo2_brd_0.png" src="_images/demo2_brd_0.png" />
+<img alt="_images/demo2_brd_3d_1.png" src="_images/demo2_brd_3d_1.png" />
 <table border="1" class="docutils">
 <caption></caption>
 <colgroup>
@@ -203,122 +95,241 @@ which is the path to the eagle .sch or .brd file:</p>
 </thead>
 <tbody valign="top">
 <tr><td>C1</td>
-<td>10u</td>
-<td>E2,5-6</td>
-<td>polcap</td>
-<td>(1950 400)</td>
-<td>R0</td>
+<td>30p</td>
+<td>C1206</td>
+<td>rcl</td>
+<td>(0.5 0.85)</td>
+<td>R270</td>
 </tr>
 <tr><td>C2</td>
-<td>10u</td>
-<td>E2,5-6</td>
-<td>polcap</td>
-<td>(1950 900)</td>
-<td>R0</td>
+<td>30p</td>
+<td>C1206</td>
+<td>rcl</td>
+<td>(1.225 0.85)</td>
+<td>R270</td>
 </tr>
 <tr><td>C3</td>
 <td>10n</td>
 <td>C025-025X050</td>
 <td>rcl</td>
-<td>(1950 200)</td>
+<td>(0.125 0.9)</td>
 <td>R180</td>
 </tr>
 <tr><td>C4</td>
-<td>10n</td>
-<td>C025-025X050</td>
+<td>47u/25V</td>
+<td>TAP5-45</td>
 <td>rcl</td>
-<td>(1950 1100)</td>
+<td>(0.175 0.275)</td>
 <td>R180</td>
 </tr>
 <tr><td>C5</td>
-<td>27p</td>
-<td>C2,5-2</td>
-<td>capacitor-wima</td>
-<td>(1700 500)</td>
-<td>R270</td>
-</tr>
-<tr><td>C6</td>
-<td>27p</td>
-<td>C2,5-2</td>
-<td>capacitor-wima</td>
-<td>(1250 250)</td>
-<td>R90</td>
+<td>47u</td>
+<td>TAP5-45</td>
+<td>rcl</td>
+<td>(0.175 0.725)</td>
+<td>R180</td>
 </tr>
 <tr><td>D1</td>
 <td>1N4148</td>
 <td>DO35-10</td>
 <td>diode</td>
-<td>(900 200)</td>
+<td>(1.075 0.25)</td>
 <td>R0</td>
 </tr>
 <tr><td>IC1</td>
-<td>16F84</td>
+<td>PIC16F84AP</td>
 <td>DIL18</td>
 <td>microchip</td>
-<td>(1100 700)</td>
-<td>R180</td>
+<td>(0.975 0.525)</td>
+<td>R0</td>
 </tr>
-<tr><td>J1</td>
-<td>&nbsp;</td>
-<td>1X20</td>
+<tr><td>IC2</td>
+<td>78L05Z</td>
+<td>TO92</td>
+<td>linear</td>
+<td>(0.15 0.5)</td>
+<td>R90</td>
+</tr>
+<tr><td>JP1</td>
+<td>PROG</td>
+<td>1X04</td>
 <td>PINHEAD</td>
-<td>(1050 1400)</td>
+<td>(1.55 0.85)</td>
+<td>R0</td>
+</tr>
+<tr><td>JP2</td>
+<td>APPL</td>
+<td>1X17</td>
+<td>PINHEAD</td>
+<td>(0.875 0.1)</td>
 <td>R180</td>
 </tr>
 <tr><td>Q1</td>
 <td>&nbsp;</td>
 <td>QS</td>
 <td>special</td>
-<td>(1550 250)</td>
-<td>R0</td>
+<td>(0.875 0.85)</td>
+<td>R180</td>
 </tr>
 <tr><td>R1</td>
-<td>2.2k</td>
-<td>0207/10</td>
+<td>2,2k</td>
+<td>R1206</td>
 <td>rcl</td>
-<td>(900 350)</td>
-<td>R0</td>
-</tr>
-<tr><td>U1</td>
-<td>78L05</td>
-<td>TO92</td>
-<td>linear</td>
-<td>(1950 650)</td>
+<td>(1.525 0.475)</td>
 <td>R270</td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
+<p>The same for schematic without 3D:</p>
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.sch
+      :scale: 30%
+
+.. eagle-partlist:: ~/.eagle/projects/examples/tutorial/demo2.sch</pre>
 </div>
-<div class="section" id="image-options">
-<h2>Image options<a class="headerlink" href="#image-options" title="Permalink to this headline">¶</a></h2>
+<p>The above snippet would render like this:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/demo2_sch_2.png"><img alt="_images/demo2_sch_2.png" src="_images/demo2_sch_2.png" style="width: 470.1px; height: 321.6px;" /></a>
+<table border="1" class="docutils">
+<caption></caption>
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">part</th>
+<th class="head">value</th>
+<th class="head">device</th>
+<th class="head">package</th>
+<th class="head">library</th>
+<th class="head">sheet</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>C1</td>
+<td>30p</td>
+<td>C-EUC1206</td>
+<td>C1206</td>
+<td>rcl</td>
+<td>1</td>
+</tr>
+<tr><td>C2</td>
+<td>30p</td>
+<td>C-EUC1206</td>
+<td>C1206</td>
+<td>rcl</td>
+<td>1</td>
+</tr>
+<tr><td>C3</td>
+<td>10n</td>
+<td>C-EU025-025X050</td>
+<td>C025-025X050</td>
+<td>rcl</td>
+<td>1</td>
+</tr>
+<tr><td>C4</td>
+<td>47u/25V</td>
+<td>CPOL-EUTAP5-45</td>
+<td>TAP5-45</td>
+<td>rcl</td>
+<td>1</td>
+</tr>
+<tr><td>C5</td>
+<td>47u</td>
+<td>CPOL-EUTAP5-45</td>
+<td>TAP5-45</td>
+<td>rcl</td>
+<td>1</td>
+</tr>
+<tr><td>D1</td>
+<td>1N4148</td>
+<td>1N4148</td>
+<td>DO35-10</td>
+<td>diode</td>
+<td>1</td>
+</tr>
+<tr><td>IC1</td>
+<td>PIC16F84AP</td>
+<td>PIC16F84AP</td>
+<td>DIL18</td>
+<td>microchip</td>
+<td>1</td>
+</tr>
+<tr><td>IC2</td>
+<td>78L05Z</td>
+<td>78L05Z</td>
+<td>TO92</td>
+<td>linear</td>
+<td>1</td>
+</tr>
+<tr><td>JP1</td>
+<td>PROG</td>
+<td>PINHD-1X4</td>
+<td>1X04</td>
+<td>pinhead</td>
+<td>1</td>
+</tr>
+<tr><td>JP2</td>
+<td>APPL</td>
+<td>PINHD-1X17</td>
+<td>1X17</td>
+<td>pinhead</td>
+<td>1</td>
+</tr>
+<tr><td>Q1</td>
+<td>&nbsp;</td>
+<td>XTAL/S</td>
+<td>QS</td>
+<td>special</td>
+<td>1</td>
+</tr>
+<tr><td>R1</td>
+<td>2,2k</td>
+<td>R-EU_R1206</td>
+<td>R1206</td>
+<td>rcl</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="common-options">
+<h2>Common options<a class="headerlink" href="#common-options" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="timeout">
 <h3>timeout<a class="headerlink" href="#timeout" title="Permalink to this headline">¶</a></h3>
 <p>Using the option <tt class="docutils literal"><span class="pre">timeout</span></tt> you can set the timeout (default 20) in seconds for processing.
 Eagle can block the export by displaying a messagebox. If this happens
 the export is aborted after timeout:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :timeout: 60</pre>
 </div>
 </div>
+</div>
+<div class="section" id="image-options">
+<h2>Image options<a class="headerlink" href="#image-options" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="resolution">
 <h3>resolution<a class="headerlink" href="#resolution" title="Permalink to this headline">¶</a></h3>
 <p>Using the option <tt class="docutils literal"><span class="pre">resolution</span></tt> you can set the resolution in dpi,
 valid range: 50..2400, default is 150:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :resolution: 50
 
-.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :resolution: 100
 
-.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :resolution: 200</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><img alt="_images/singlesided_brd_2.png" src="_images/singlesided_brd_2.png" />
-<img alt="_images/singlesided_brd_3.png" src="_images/singlesided_brd_3.png" />
-<img alt="_images/singlesided_brd_4.png" src="_images/singlesided_brd_4.png" />
+<div><img alt="_images/demo2_brd_3.png" src="_images/demo2_brd_3.png" />
+<img alt="_images/demo2_brd_4.png" src="_images/demo2_brd_4.png" />
+<img alt="_images/demo2_brd_5.png" src="_images/demo2_brd_5.png" />
 </div></blockquote>
 </div>
 <div class="section" id="palette">
@@ -335,23 +346,23 @@ valid range: 50..2400, default is 150:</p>
 </dl>
 <p>Default:white</p>
 <p>Example:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.sch
    :palette:   white
    :scale: 30 %
 
-.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.sch
    :palette:   black
    :scale: 30 %
 
-.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.sch
    :palette:   colored
    :scale: 30 %</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/singlesided_sch_5.png"><img alt="_images/singlesided_sch_5.png" src="_images/singlesided_sch_5.png" style="width: 321.6px; height: 470.1px;" /></a>
-<a class="reference internal image-reference" href="_images/singlesided_sch_6.png"><img alt="_images/singlesided_sch_6.png" src="_images/singlesided_sch_6.png" style="width: 321.6px; height: 470.1px;" /></a>
-<a class="reference internal image-reference" href="_images/singlesided_sch_7.png"><img alt="_images/singlesided_sch_7.png" src="_images/singlesided_sch_7.png" style="width: 321.6px; height: 470.1px;" /></a>
+<div><a class="reference internal image-reference" href="_images/demo2_sch_6.png"><img alt="_images/demo2_sch_6.png" src="_images/demo2_sch_6.png" style="width: 470.1px; height: 321.6px;" /></a>
+<a class="reference internal image-reference" href="_images/demo2_sch_7.png"><img alt="_images/demo2_sch_7.png" src="_images/demo2_sch_7.png" style="width: 470.1px; height: 321.6px;" /></a>
+<a class="reference internal image-reference" href="_images/demo2_sch_8.png"><img alt="_images/demo2_sch_8.png" src="_images/demo2_sch_8.png" style="width: 470.1px; height: 321.6px;" /></a>
 </div></blockquote>
 </div>
 <div class="section" id="layers">
@@ -359,78 +370,140 @@ valid range: 50..2400, default is 150:</p>
 <p>Using the option <tt class="docutils literal"><span class="pre">layers</span></tt> you can diaplay or hide layers.
 Check eagle documentation for valid settings.</p>
 <p>Example:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :layers:   via,pads</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><img alt="_images/singlesided_brd_8.png" src="_images/singlesided_brd_8.png" />
+<div><img alt="_images/demo2_brd_9.png" src="_images/demo2_brd_9.png" />
 </div></blockquote>
 </div>
 <div class="section" id="mirror">
 <h3>mirror<a class="headerlink" href="#mirror" title="Permalink to this headline">¶</a></h3>
 <p>Using the option <tt class="docutils literal"><span class="pre">mirror</span></tt> you can mirror the image.</p>
 <p>Example:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :mirror:</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><img alt="_images/singlesided_brd_9.png" src="_images/singlesided_brd_9.png" />
+<div><img alt="_images/demo2_brd_10.png" src="_images/demo2_brd_10.png" />
 </div></blockquote>
 </div>
 <div class="section" id="command">
 <h3>command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
 <p>Using the option <tt class="docutils literal"><span class="pre">command</span></tt> you can apply eagle commands.</p>
 <p>Example:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :command:   display none dimension</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><img alt="_images/singlesided_brd_10.png" src="_images/singlesided_brd_10.png" />
+<div><img alt="_images/demo2_brd_11.png" src="_images/demo2_brd_11.png" />
 </div></blockquote>
 </div>
 <div class="section" id="scale-alt">
 <h3>scale, alt<a class="headerlink" href="#scale-alt" title="Permalink to this headline">¶</a></h3>
 <p>Example:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.sch
    :scale: 20 %
    :alt: alternate text
 
-.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
    :scale: 20 %
    :alt: alternate text</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/singlesided_sch_11.png"><img alt="alternate text" src="_images/singlesided_sch_11.png" style="width: 214.4px; height: 313.4px;" /></a>
-<a class="reference internal image-reference" href="_images/singlesided_brd_12.png"><img alt="alternate text" src="_images/singlesided_brd_12.png" style="width: 65.6px; height: 45.6px;" /></a>
+<div><a class="reference internal image-reference" href="_images/demo2_sch_12.png"><img alt="alternate text" src="_images/demo2_sch_12.png" style="width: 313.4px; height: 214.4px;" /></a>
+<a class="reference internal image-reference" href="_images/demo2_brd_13.png"><img alt="alternate text" src="_images/demo2_brd_13.png" style="width: 54.8px; height: 31.2px;" /></a>
 </div></blockquote>
 </div>
 <div class="section" id="height-width">
 <h3>height, width<a class="headerlink" href="#height-width" title="Permalink to this headline">¶</a></h3>
 <p>Example:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
      :height: 100px
      :width:  100 px</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><img alt="_images/singlesided_brd_13.png" src="_images/singlesided_brd_13.png" style="width: 100px; height: 100px;" />
+<div><img alt="_images/demo2_brd_14.png" src="_images/demo2_brd_14.png" style="width: 100px; height: 100px;" />
 </div></blockquote>
 </div>
 <div class="section" id="align">
 <h3>align<a class="headerlink" href="#align" title="Permalink to this headline">¶</a></h3>
 <p>Example:</p>
-<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/singlesided/singlesided.brd
+<div class="highlight-python"><pre>.. eagle-image:: ~/.eagle/projects/examples/tutorial/demo2.brd
      :height: 100px
      :width:  100 px
      :align: right</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
-<div><img alt="_images/singlesided_brd_14.png" class="align-right" src="_images/singlesided_brd_14.png" style="width: 100px; height: 100px;" />
+<div><img alt="_images/demo2_brd_15.png" class="align-right" src="_images/demo2_brd_15.png" style="width: 100px; height: 100px;" />
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="image3d-options">
+<h2>Image3D options<a class="headerlink" href="#image3d-options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="size">
+<h3>size<a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h3>
+<p>Size of image, width x height:</p>
+<div class="highlight-python"><pre>.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :size: 80x60
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :size: 400x300
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :size: 400x100
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :size: 100x400
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :size: 1600x1200
+   :scale: 30%</pre>
+</div>
+<p>The above snippet would render like this:</p>
+<blockquote>
+<div><img alt="_images/demo2_brd_3d_16.png" src="_images/demo2_brd_3d_16.png" />
+<img alt="_images/demo2_brd_3d_17.png" src="_images/demo2_brd_3d_17.png" />
+<img alt="_images/demo2_brd_3d_18.png" src="_images/demo2_brd_3d_18.png" />
+<img alt="_images/demo2_brd_3d_19.png" src="_images/demo2_brd_3d_19.png" />
+<a class="reference internal image-reference" href="_images/demo2_brd_3d_20.png"><img alt="_images/demo2_brd_3d_20.png" src="_images/demo2_brd_3d_20.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div></blockquote>
+</div>
+<div class="section" id="pcbrotate">
+<h3>pcbrotate<a class="headerlink" href="#pcbrotate" title="Permalink to this headline">¶</a></h3>
+<p>Rotate PCB around x,y,z:</p>
+<div class="highlight-python"><pre>.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :pcbrotate: 90,0,0
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :pcbrotate: 0,90,0
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :pcbrotate: 0,0,90
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :pcbrotate: 180,0,0
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :pcbrotate: 0,180,0
+
+.. eagle-image3d:: ~/.eagle/projects/examples/tutorial/demo2.brd
+   :pcbrotate: 0,0,180</pre>
+</div>
+<p>The above snippet would render like this:</p>
+<blockquote>
+<div><img alt="_images/demo2_brd_3d_21.png" src="_images/demo2_brd_3d_21.png" />
+<img alt="_images/demo2_brd_3d_22.png" src="_images/demo2_brd_3d_22.png" />
+<img alt="_images/demo2_brd_3d_23.png" src="_images/demo2_brd_3d_23.png" />
+<img alt="_images/demo2_brd_3d_24.png" src="_images/demo2_brd_3d_24.png" />
+<img alt="_images/demo2_brd_3d_25.png" src="_images/demo2_brd_3d_25.png" />
+<img alt="_images/demo2_brd_3d_26.png" src="_images/demo2_brd_3d_26.png" />
 </div></blockquote>
 </div>
 </div>
@@ -439,31 +512,31 @@ Check eagle documentation for valid settings.</p>
 <div class="section" id="raw">
 <h3>raw<a class="headerlink" href="#raw" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://www.cadsoftusa.com/">Eagle</a> partlist export is included as literal text:</p>
-<div class="highlight-python"><pre>.. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+<div class="highlight-python"><pre>.. eagle-partlist:: ~/.eagle/projects/examples/tutorial/demo2.sch
      :raw:</pre>
 </div>
 <p>The above snippet would render like this:</p>
 <blockquote>
 <div><div class="highlight-python"><pre>Partlist
 
-Exported from singlesided.sch at 4/29/11 4:30 PM
+Exported from demo2.sch at 5/22/11 11:05 PM
 
 EAGLE Version 5.10.0 Copyright (c) 1988-2010 CadSoft
 
-Part     Value          Device          Package      Library        Sheet
+Part     Value          Device          Package      Library   Sheet
 
-C1       10u            E2,5-6          E2,5-6       polcap         1
-C2       10u            E2,5-6          E2,5-6       polcap         1
-C3       10n            C-EU025-025X050 C025-025X050 rcl            1
-C4       10n            C-EU025-025X050 C025-025X050 rcl            1
-C5       27p            C2.5/2          C2,5-2       capacitor-wima 1
-C6       27p            C2.5/2          C2,5-2       capacitor-wima 1
-D1       1N4148         1N4148          DO35-10      diode          1
-IC1      16F84          PIC16F84AP      DIL18        microchip      1
-J1                      PINHD-1X20      1X20         PINHEAD        1
-Q1                      XTAL/S          QS           special        1
-R1       2.2k           R-EU_0207/10    0207/10      rcl            1
-U1       78L05          78LXXZ          TO92         linear         1
+C1       30p            C-EUC1206       C1206        rcl       1
+C2       30p            C-EUC1206       C1206        rcl       1
+C3       10n            C-EU025-025X050 C025-025X050 rcl       1
+C4       47u/25V        CPOL-EUTAP5-45  TAP5-45      rcl       1
+C5       47u            CPOL-EUTAP5-45  TAP5-45      rcl       1
+D1       1N4148         1N4148          DO35-10      diode     1
+IC1      PIC16F84AP     PIC16F84AP      DIL18        microchip 1
+IC2      78L05Z         78L05Z          TO92         linear    1
+JP1      PROG           PINHD-1X4       1X04         pinhead   1
+JP2      APPL           PINHD-1X17      1X17         pinhead   1
+Q1                      XTAL/S          QS           special   1
+R1       2,2k           R-EU_R1206      R1206        rcl       1
 </pre>
 </div>
 </div></blockquote>
@@ -471,7 +544,7 @@ U1       78L05          78LXXZ          TO92         linear         1
 <div class="section" id="header">
 <h3>header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h3>
 <p>A comma-separated list of selected column names:</p>
-<div class="highlight-python"><pre>.. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+<div class="highlight-python"><pre>.. eagle-partlist:: ~/.eagle/projects/examples/tutorial/demo2.sch
      :header: part, value</pre>
 </div>
 <p>The above snippet would render like this:</p>
@@ -489,40 +562,40 @@ U1       78L05          78LXXZ          TO92         linear         1
 </thead>
 <tbody valign="top">
 <tr><td>C1</td>
-<td>10u</td>
+<td>30p</td>
 </tr>
 <tr><td>C2</td>
-<td>10u</td>
+<td>30p</td>
 </tr>
 <tr><td>C3</td>
 <td>10n</td>
 </tr>
 <tr><td>C4</td>
-<td>10n</td>
+<td>47u/25V</td>
 </tr>
 <tr><td>C5</td>
-<td>27p</td>
-</tr>
-<tr><td>C6</td>
-<td>27p</td>
+<td>47u</td>
 </tr>
 <tr><td>D1</td>
 <td>1N4148</td>
 </tr>
 <tr><td>IC1</td>
-<td>16F84</td>
+<td>PIC16F84AP</td>
 </tr>
-<tr><td>J1</td>
-<td>&nbsp;</td>
+<tr><td>IC2</td>
+<td>78L05Z</td>
+</tr>
+<tr><td>JP1</td>
+<td>PROG</td>
+</tr>
+<tr><td>JP2</td>
+<td>APPL</td>
 </tr>
 <tr><td>Q1</td>
 <td>&nbsp;</td>
 </tr>
 <tr><td>R1</td>
-<td>2.2k</td>
-</tr>
-<tr><td>U1</td>
-<td>78L05</td>
+<td>2,2k</td>
 </tr>
 </tbody>
 </table>
@@ -532,7 +605,7 @@ U1       78L05          78LXXZ          TO92         linear         1
 <h3>widths<a class="headerlink" href="#widths" title="Permalink to this headline">¶</a></h3>
 <p>A comma- or space-separated list of relative column widths.
 The default is equal-width columns:</p>
-<div class="highlight-python"><pre>.. eagle-partlist:: ~/.eagle/projects/examples/singlesided/singlesided.sch
+<div class="highlight-python"><pre>.. eagle-partlist:: ~/.eagle/projects/examples/tutorial/demo2.sch
      :header: part, value
      :widths:  2,8</pre>
 </div>
@@ -551,40 +624,40 @@ The default is equal-width columns:</p>
 </thead>
 <tbody valign="top">
 <tr><td>C1</td>
-<td>10u</td>
+<td>30p</td>
 </tr>
 <tr><td>C2</td>
-<td>10u</td>
+<td>30p</td>
 </tr>
 <tr><td>C3</td>
 <td>10n</td>
 </tr>
 <tr><td>C4</td>
-<td>10n</td>
+<td>47u/25V</td>
 </tr>
 <tr><td>C5</td>
-<td>27p</td>
-</tr>
-<tr><td>C6</td>
-<td>27p</td>
+<td>47u</td>
 </tr>
 <tr><td>D1</td>
 <td>1N4148</td>
 </tr>
 <tr><td>IC1</td>
-<td>16F84</td>
+<td>PIC16F84AP</td>
 </tr>
-<tr><td>J1</td>
-<td>&nbsp;</td>
+<tr><td>IC2</td>
+<td>78L05Z</td>
+</tr>
+<tr><td>JP1</td>
+<td>PROG</td>
+</tr>
+<tr><td>JP2</td>
+<td>APPL</td>
 </tr>
 <tr><td>Q1</td>
 <td>&nbsp;</td>
 </tr>
 <tr><td>R1</td>
-<td>2.2k</td>
-</tr>
-<tr><td>U1</td>
-<td>78L05</td>
+<td>2,2k</td>
 </tr>
 </tbody>
 </table>
@@ -604,8 +677,11 @@ The default is equal-width columns:</p>
 <li><a class="reference internal" href="#">Usage</a><ul>
 <li><a class="reference internal" href="#configuration">Configuration</a></li>
 <li><a class="reference internal" href="#directives">Directives</a></li>
-<li><a class="reference internal" href="#image-options">Image options</a><ul>
+<li><a class="reference internal" href="#common-options">Common options</a><ul>
 <li><a class="reference internal" href="#timeout">timeout</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image-options">Image options</a><ul>
 <li><a class="reference internal" href="#resolution">resolution</a></li>
 <li><a class="reference internal" href="#palette">palette</a></li>
 <li><a class="reference internal" href="#layers">layers</a></li>
@@ -614,6 +690,11 @@ The default is equal-width columns:</p>
 <li><a class="reference internal" href="#scale-alt">scale, alt</a></li>
 <li><a class="reference internal" href="#height-width">height, width</a></li>
 <li><a class="reference internal" href="#align">align</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image3d-options">Image3D options</a><ul>
+<li><a class="reference internal" href="#size">size</a></li>
+<li><a class="reference internal" href="#pcbrotate">pcbrotate</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#partlist-options">Partlist options</a><ul>
@@ -629,6 +710,9 @@ The default is equal-width columns:</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="readme.html"
                         title="previous chapter">About</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dev.html"
+                        title="next chapter">Development</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/usage.txt"
@@ -658,9 +742,12 @@ The default is equal-width columns:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="dev.html" title="Development"
+             >next</a> |</li>
+        <li class="right" >
           <a href="readme.html" title="About"
              >previous</a> |</li>
-        <li><a href="index.html">sphinxcontrib-eagle v0.0.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">sphinxcontrib-eagle v0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
