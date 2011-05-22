@@ -5,6 +5,7 @@ from docutils.parsers.rst import directives
 from docutils.parsers.rst.directives.tables import CSVTable
 from docutils.statemachine import StringList
 from eagexp.image import export_image
+from eagexp.image3d import export_image3d
 from eagexp.partlist import raw_partlist, structured_partlist
 from unipath import Path
 import docutils.parsers.rst.directives.images
@@ -22,6 +23,38 @@ log.debug('sphinxcontrib.eagle (version:%s)' % __version__)
 parent = docutils.parsers.rst.directives.images.Image
 images_to_delete = []
 image_id = 0
+
+class EagleImage3dDirective(parent):
+    option_spec = parent.option_spec.copy()
+    option_spec.update(dict(
+                       timeout=directives.nonnegative_int,
+                       size=directives.unchanged,
+                       pcbrotate=directives.unchanged,
+                       ))
+    def run(self):
+        timeout = self.options.get('timeout', 20)
+
+        size = self.options.get('size', '800x600')
+        size=map(int, size.split('x'))
+
+        pcbrotate = self.options.get('pcbrotate', '0,0,0')
+        pcbrotate=map(int, pcbrotate.split(','))
+
+        fname_sch = str(self.arguments[0])
+        fname_sch = Path(fname_sch).expand().absolute()
+        
+        global image_id        
+        fname_img = '%s_3d_%s.png' % (fname_sch.name.replace('.','_'), str(image_id))
+        image_id += 1
+        fname_img_abs = Path(self.src).parent.child(fname_img)
+        images_to_delete.append(fname_img_abs)
+
+        export_image3d(fname_sch, fname_img_abs, size=size, timeout=timeout, pcb_rotate=pcbrotate)
+        
+        self.arguments[0] = fname_img
+        x = parent.run(self)
+
+        return x
 
 class EagleImageDirective(parent):
     option_spec = parent.option_spec.copy()
@@ -119,6 +152,7 @@ def setup(app):
     #                     '$ %(command)s\n%(output)s', 'env')
     app.add_directive('eagle-image', EagleImageDirective)
     app.add_directive('eagle-partlist', EaglePartlistDirective)
+    app.add_directive('eagle-image3d', EagleImage3dDirective)
     app.connect('build-finished', cleanup)
 
 #logging.basicConfig(level=logging.DEBUG)
