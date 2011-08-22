@@ -11,11 +11,12 @@ from unipath import Path
 import docutils.parsers.rst.directives.images
 import logging
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
    
 log = logging.getLogger(__name__)
 log.debug('sphinxcontrib.eagle (version:%s)' % __version__)
 
+ENABLE_CACHE = 1
 
 #class EagleError(Exception):
 #    pass
@@ -23,6 +24,49 @@ log.debug('sphinxcontrib.eagle (version:%s)' % __version__)
 parent = docutils.parsers.rst.directives.images.Image
 images_to_delete = []
 image_id = 0
+
+def init_cache(app):
+    create = False
+    if hasattr(app.env, 'eagle_cache'):
+        if app.env.eagle_cache_version != __version__:
+            log.debug('cache version mismatch: %s!=%s' % (app.env.eagle_cache_version , __version__))
+            create = True
+    else:
+        log.debug('missing cache')
+        create = True
+    if create:
+        log.debug('creating cache')
+        app.env.eagle_cache = dict()
+        app.env.eagle_cache_version = __version__
+    init_cache.cache = app.env.eagle_cache
+#    init_cache.cache_old_keys = app.env.eagle_cache.keys()
+    init_cache.cache_new_keys = set()
+
+def do_action(fname_sch, fname_img_abs, directive, export_func):
+    if not ENABLE_CACHE:
+        return export_func(fname_sch, fname_img_abs)
+        
+
+    cache = init_cache.cache
+    
+    # dict is not hashable -> convert it
+    options = str(sorted(directive.options.items()))
+    
+    cache_key = str(fname_sch), fname_sch.mtime(), options, directive.__class__.__name__
+    if cache_key in cache.keys():
+        last_data = cache[cache_key]
+        log.debug('found in cache:%s' % str(cache_key))
+        if fname_img_abs:
+            open(fname_img_abs, 'wb').write(last_data)
+    else:
+        log.debug('not in cache: %s' % str(cache_key))
+        last_data = export_func(fname_sch, fname_img_abs)
+        if fname_img_abs:
+            assert last_data is None
+            last_data = open(fname_img_abs, 'rb').read()
+        cache[cache_key] = last_data
+    init_cache.cache_new_keys.add(cache_key)
+    return last_data
 
 class EagleImage3dDirective(parent):
     option_spec = parent.option_spec.copy()
@@ -35,21 +79,23 @@ class EagleImage3dDirective(parent):
         timeout = self.options.get('timeout', 20)
 
         size = self.options.get('size', '800x600')
-        size=map(int, size.split('x'))
+        size = map(int, size.split('x'))
 
         pcbrotate = self.options.get('pcbrotate', '0,0,0')
-        pcbrotate=map(int, pcbrotate.split(','))
+        pcbrotate = map(int, pcbrotate.split(','))
 
         fname_sch = str(self.arguments[0])
         fname_sch = Path(fname_sch).expand().absolute()
         
         global image_id        
-        fname_img = '%s_3d_%s.png' % (fname_sch.name.replace('.','_'), str(image_id))
+        fname_img = '%s_3d_%s.png' % (fname_sch.name.replace('.', '_'), str(image_id))
         image_id += 1
         fname_img_abs = Path(self.src).parent.child(fname_img)
-        images_to_delete.append(fname_img_abs)
 
-        export_image3d(fname_sch, fname_img_abs, size=size, timeout=timeout, pcb_rotate=pcbrotate)
+        def export_func(fname_sch, fname_img_abs):        
+            export_image3d(fname_sch, fname_img_abs, size=size, timeout=timeout, pcb_rotate=pcbrotate)
+        do_action(fname_sch, fname_img_abs, self, export_func)
+        images_to_delete.append(fname_img_abs)
         
         self.arguments[0] = fname_img
         x = parent.run(self)
@@ -81,17 +127,20 @@ class EagleImageDirective(parent):
         fname_sch = str(self.arguments[0])
         fname_sch = Path(fname_sch).expand().absolute()
         
+        
         global image_id        
-        fname_img = '%s_%s.png' % (fname_sch.name.replace('.','_'), str(image_id))
+        fname_img = '%s_%s.png' % (fname_sch.name.replace('.', '_'), str(image_id))
         image_id += 1
         fname_img_abs = Path(self.src).parent.child(fname_img)
-        images_to_delete.append(fname_img_abs)
 
-        export_image(fname_sch, fname_img_abs, palette=palette, resolution=resolution, timeout=timeout, layers=layers, mirror=mirror, command=command)
-        
         self.arguments[0] = fname_img
         x = parent.run(self)
 
+        def export_func(fname_sch, fname_img_abs):        
+            export_image(fname_sch, fname_img_abs, palette=palette, resolution=resolution, timeout=timeout, layers=layers, mirror=mirror, command=command)
+        do_action(fname_sch, fname_img_abs, self, export_func)
+        images_to_delete.append(fname_img_abs)
+            
         return x
     
 class EaglePartlistDirective(CSVTable):
@@ -114,13 +163,20 @@ class EaglePartlistDirective(CSVTable):
         fname_sch = str(self.arguments[0])
         fname_sch = Path(fname_sch).expand().absolute()
 
-
+        elems = []
         if raw:
-            s = raw_partlist(fname_sch, timeout=timeout)
+            def export_func(fname_sch, fname_img_abs):        
+                return raw_partlist(fname_sch, timeout=timeout)
+            s = do_action(fname_sch, None, self, export_func)
+        else:            
+            def export_func(fname_sch, fname_img_abs):        
+                return structured_partlist(fname_sch, timeout=timeout)
+            (header, data) = do_action(fname_sch, None, self, export_func)
+                
+        if raw:
             node_class = nodes.literal_block
             elems = [node_class(s, s)]
         else:            
-            (header, data) = structured_partlist(fname_sch, timeout=timeout)
             if 'header' in self.options:
                 selected = self.options['header']
                 selected = selected.split(',')     
@@ -139,12 +195,20 @@ class EaglePartlistDirective(CSVTable):
 
         return elems
 
+def cleanup_cache():
+    unused = [x for x in init_cache.cache.keys() if x not in init_cache.cache_new_keys]
+    for x in unused:
+        log.debug('removing key from cache:' + str(x))
+        del init_cache.cache[x]
+        
 def cleanup(app, exception):
     for x in images_to_delete:
         f = Path(x)
         if f.exists():
             log.debug('removing image:' + x)
             f.remove()
+    if ENABLE_CACHE:
+        cleanup_cache()
 
 def setup(app):
     #app.add_config_value('programoutput_use_ansi', False, 'env')
@@ -154,5 +218,6 @@ def setup(app):
     app.add_directive('eagle-partlist', EaglePartlistDirective)
     app.add_directive('eagle-image3d', EagleImage3dDirective)
     app.connect('build-finished', cleanup)
+    app.connect('builder-inited', init_cache)
 
 #logging.basicConfig(level=logging.DEBUG)
