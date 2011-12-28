@@ -11,7 +11,7 @@ from unipath import Path
 import docutils.parsers.rst.directives.images
 import logging
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
    
 log = logging.getLogger(__name__)
 log.debug('sphinxcontrib.eagle (version:%s)' % __version__)
@@ -68,6 +68,14 @@ def do_action(fname_sch, fname_img_abs, directive, export_func):
     init_cache.cache_new_keys.add(cache_key)
     return last_data
 
+def get_fname(self):
+    fname_sch = str(self.arguments[0])
+    cwd=Path.cwd()
+    Path(self.src).parent.chdir()
+    fname_sch = Path(fname_sch).expand().absolute()
+    cwd.chdir()
+    return fname_sch
+    
 class EagleImage3dDirective(parent):
     option_spec = parent.option_spec.copy()
     option_spec.update(dict(
@@ -84,8 +92,7 @@ class EagleImage3dDirective(parent):
         pcbrotate = self.options.get('pcbrotate', '0,0,0')
         pcbrotate = map(int, pcbrotate.split(','))
 
-        fname_sch = str(self.arguments[0])
-        fname_sch = Path(fname_sch).expand().absolute()
+        fname_sch = get_fname(self)
         
         global image_id        
         fname_img = '%s_3d_%s.png' % (fname_sch.name.replace('.', '_'), str(image_id))
@@ -124,9 +131,7 @@ class EagleImageDirective(parent):
         if layers:
             layers = layers.split(',')
 
-        fname_sch = str(self.arguments[0])
-        fname_sch = Path(fname_sch).expand().absolute()
-        
+        fname_sch = get_fname(self)
         
         global image_id        
         fname_img = '%s_%s.png' % (fname_sch.name.replace('.', '_'), str(image_id))
@@ -160,8 +165,7 @@ class EaglePartlistDirective(CSVTable):
 
         raw = 'raw' in self.options
         
-        fname_sch = str(self.arguments[0])
-        fname_sch = Path(fname_sch).expand().absolute()
+        fname_sch = get_fname(self)
 
         elems = []
         if raw:
