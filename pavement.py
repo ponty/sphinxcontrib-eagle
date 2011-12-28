@@ -52,13 +52,7 @@ classifiers = [
     'Topic :: Utilities',
     ]
 
-install_requires = [
-    # -*- Install requires: -*-
-    'setuptools',
-    'path.py',
-    'eagexp',
-    'Sphinx>=1.0',
-    ]
+install_requires = open("requirements.txt").read().split('\n')
 
 # compatible with distutils of python 2.3+ or later
 setup(
