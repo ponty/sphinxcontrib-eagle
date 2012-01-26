@@ -8,6 +8,9 @@ Links:
  * home: https://github.com/ponty/sphinxcontrib-eagle
  * documentation: http://ponty.github.com/sphinxcontrib-eagle
 
+Features:
+ - eagexp_ is used for processing
+ 
 Basic usage
 ============
 ::
@@ -38,12 +41,10 @@ General
  * install povray_ (optional for 3D)
  * install setuptools_
  * install pyvirtualdisplay_ , xvfb_ , xephyr_ (optional for background processing)
- * install eagexp_
  * install the program::
 
     # as root
-    easy_install https://github.com/ponty/eagexp/zipball/master
-    easy_install https://github.com/ponty/sphinxcontrib-eagle/zipball/master
+    easy_install sphinxcontrib-eagle
 
 
 Ubuntu
@@ -57,8 +58,7 @@ Ubuntu
     # optional for background processing
     sudo apt-get install xvfb xserver-xephyr
 
-    sudo easy_install https://github.com/ponty/eagexp/zipball/master
-    sudo easy_install https://github.com/ponty/sphinxcontrib-eagle/zipball/master
+    sudo easy_install sphinxcontrib-eagle
 
 
 Uninstall

@@ -98,6 +98,7 @@ if ALL_TASKS_LOADED:
                                      ]
     
     options.paved.dist.manifest.include.remove('distribute_setup.py')
+    options.paved.dist.manifest.include.add('requirements.txt')
     
     @task
     @needs('sloccount', 'html', 'pdf', 'sdist', 'nose')

@@ -11,7 +11,7 @@ from unipath import Path
 import docutils.parsers.rst.directives.images
 import logging
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
    
 log = logging.getLogger(__name__)
 log.debug('sphinxcontrib.eagle (version:%s)' % __version__)
