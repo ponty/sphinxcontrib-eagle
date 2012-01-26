@@ -39,12 +39,12 @@ General
 
  * install eagle_
  * install povray_ (optional for 3D)
- * install setuptools_
+ * install pip_
  * install pyvirtualdisplay_ , xvfb_ , xephyr_ (optional for background processing)
  * install the program::
 
     # as root
-    easy_install sphinxcontrib-eagle
+    pip install sphinxcontrib-eagle
 
 
 Ubuntu
@@ -53,12 +53,12 @@ Ubuntu
 
     sudo apt-get install eagle
     sudo apt-get install povray
-    sudo apt-get install python-setuptools
+    sudo apt-get install python-pip
 
     # optional for background processing
     sudo apt-get install xvfb xserver-xephyr
 
-    sudo easy_install sphinxcontrib-eagle
+    sudo pip install sphinxcontrib-eagle
 
 
 Uninstall
