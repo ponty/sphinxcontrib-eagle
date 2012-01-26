@@ -141,7 +141,7 @@ The above snippet would render like this:
 layers
 --------------
 
-Using the option ``layers`` you can diaplay or hide layers. 
+Using the option ``layers`` you can display or hide layers. 
 Check eagle documentation for valid settings. 
  
 
