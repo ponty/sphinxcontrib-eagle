@@ -7,11 +7,12 @@ from docutils.statemachine import StringList
 from eagexp.image import export_image
 from eagexp.image3d import export_image3d
 from eagexp.partlist import raw_partlist, structured_partlist
-from unipath import Path
+from path import path
 import docutils.parsers.rst.directives.images
 import logging
+import os
 
-__version__ = '0.0.6'
+__version__ = '0.0.7'
    
 log = logging.getLogger(__name__)
 log.debug('sphinxcontrib.eagle (version:%s)' % __version__)
@@ -52,7 +53,7 @@ def do_action(fname_sch, fname_img_abs, directive, export_func):
     # dict is not hashable -> convert it
     options = str(sorted(directive.options.items()))
     
-    cache_key = str(fname_sch), fname_sch.mtime(), options, directive.__class__.__name__
+    cache_key = str(fname_sch), fname_sch.mtime, options, directive.__class__.__name__
     if cache_key in cache.keys():
         last_data = cache[cache_key]
         log.debug('found in cache:%s' % str(cache_key))
@@ -70,10 +71,10 @@ def do_action(fname_sch, fname_img_abs, directive, export_func):
 
 def get_fname(self):
     fname_sch = str(self.arguments[0])
-    cwd=Path.cwd()
-    Path(self.src).parent.chdir()
-    fname_sch = Path(fname_sch).expand().absolute()
-    cwd.chdir()
+    cwd=path.getcwd()
+    os.chdir(path(self.src).parent)
+    fname_sch = path(fname_sch).expand().abspath()
+    os.chdir(cwd)
     return fname_sch
     
 class EagleImage3dDirective(parent):
@@ -97,7 +98,7 @@ class EagleImage3dDirective(parent):
         global image_id        
         fname_img = '%s_3d_%s.png' % (fname_sch.name.replace('.', '_'), str(image_id))
         image_id += 1
-        fname_img_abs = Path(self.src).parent.child(fname_img)
+        fname_img_abs = path(self.src).parent/fname_img
 
         def export_func(fname_sch, fname_img_abs):        
             export_image3d(fname_sch, fname_img_abs, size=size, timeout=timeout, pcb_rotate=pcbrotate)
@@ -136,7 +137,7 @@ class EagleImageDirective(parent):
         global image_id        
         fname_img = '%s_%s.png' % (fname_sch.name.replace('.', '_'), str(image_id))
         image_id += 1
-        fname_img_abs = Path(self.src).parent.child(fname_img)
+        fname_img_abs = path(self.src).parent/fname_img
 
         self.arguments[0] = fname_img
         x = parent.run(self)
@@ -207,7 +208,7 @@ def cleanup_cache():
         
 def cleanup(app, exception):
     for x in images_to_delete:
-        f = Path(x)
+        f = path(x)
         if f.exists():
             log.debug('removing image:' + x)
             f.remove()
