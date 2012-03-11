@@ -11,7 +11,6 @@ Table of Contents
 
    readme
    usage
-   dev
 
 .. _Sphinx: http://sphinx.pocoo.org/latest
 .. _eagle: http://www.cadsoftusa.com/
