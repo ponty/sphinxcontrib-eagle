@@ -22,7 +22,7 @@ copyright = u'2011, ponty'
 author = 'ponty'
 
 
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 
 needs_sphinx = '1.0'
 

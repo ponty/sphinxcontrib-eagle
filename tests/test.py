@@ -1,5 +1,9 @@
 from nose.tools import eq_
+from sphinxcontrib.eagle import EagleImageDirective
 
-
-def test_dummy():
-    eq_(0, 0)
+def test_import():
+    x=EagleImageDirective
+    
+    
+    
+    
