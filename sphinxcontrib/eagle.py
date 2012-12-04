@@ -27,6 +27,10 @@ images_to_delete = []
 image_id = 0
 
 
+def get_src(self):
+    return self.state_machine.get_source(self.lineno)
+
+
 def init_cache(app):
     create = False
     if hasattr(app.env, 'eagle_cache'):
@@ -76,7 +80,7 @@ def do_action(fname_sch, fname_img_abs, directive, export_func):
 def get_fname(self):
     fname_sch = str(self.arguments[0])
     cwd = path.getcwd()
-    os.chdir(path(self.src).parent)
+    os.chdir(path(get_src(self)).parent)
     fname_sch = path(fname_sch).expand().abspath()
     os.chdir(cwd)
     return fname_sch
@@ -105,7 +109,7 @@ class EagleImage3dDirective(parent):
         fname_img = '%s_3d_%s.png' % (
             fname_sch.name.replace('.', '_'), str(image_id))
         image_id += 1
-        fname_img_abs = path(self.src).parent / fname_img
+        fname_img_abs = path(get_src(self)).parent / fname_img
 
         def export_func(fname_sch, fname_img_abs):
             export_image3d(fname_sch, fname_img_abs, size=size,
@@ -148,7 +152,7 @@ class EagleImageDirective(parent):
         fname_img = '%s_%s.png' % (
             fname_sch.name.replace('.', '_'), str(image_id))
         image_id += 1
-        fname_img_abs = path(self.src).parent / fname_img
+        fname_img_abs = path(get_src(self)).parent / fname_img
 
         self.arguments[0] = fname_img
         x = parent.run(self)
