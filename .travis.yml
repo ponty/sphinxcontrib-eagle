@@ -1,0 +1,25 @@
+language: python
+python:
+ - "2.7"
+ - "3.3"
+ - "3.4"
+ - "3.5"
+
+install:
+ - sudo apt-get update -qq 
+ - sudo apt-get install python-dev xvfb
+ - sudo apt-get install scrot libjpeg-dev zlib1g-dev xdotool eagle:i386 xserver-xephyr
+ - sudo apt-get install libboost-thread-dev zlib1g-dev libpng12-dev libjpeg-turbo8-dev libtiff4-dev libopenexr-dev libsdl-gfx1.2-dev
+ - pip install -r requirements-test.txt
+ - pip install .
+ - pip install coveralls
+
+script:  
+ - xauth add :0 . `mcookie`
+ - cd tests 
+ - nosetests -v --with-coverage --cover-package=eagexp test_airwires.py test_cli.py test_func.py test_partlist.py test_version.py 
+  
+after_success:
+ - coveralls
+
+

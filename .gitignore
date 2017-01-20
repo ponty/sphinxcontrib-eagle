@@ -24,7 +24,8 @@ pip-log.txt
 nosetests.xml
 
 .*
-!.gitignore
+!.git*
+!.travis*
 /distribute_setup.py
 
 
