@@ -7,7 +7,7 @@ from docutils.statemachine import StringList
 from eagexp.image import export_image
 from eagexp.image3d import export_image3d
 from eagexp.partlist import raw_partlist, structured_partlist
-from path import path
+from path import Path as path
 import docutils.parsers.rst.directives.images
 import logging
 import os
