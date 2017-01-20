@@ -3,4 +3,4 @@ nose
 coverage
 pyvirtualdisplay
 pillow
-entrypoint2
+requests>=2.12
