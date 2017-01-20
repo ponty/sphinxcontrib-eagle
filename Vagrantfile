@@ -92,7 +92,11 @@ Vagrant.configure(2) do |config|
   
 # doc dependencies
   sudo pip install -r /vagrant/requirements-doc.txt
-  
+
+# init eagle directories
+  echo 'eagle version='
+  sudo -H -u vagrant bash -c 'python -m eagexp.version'
+
   "
       config.vm.provision "shell", inline: $script
           
