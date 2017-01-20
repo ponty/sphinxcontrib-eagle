@@ -1,16 +1,17 @@
-**sphinxcontrib-eagle**
+===================
+sphinxcontrib-eagle
+===================
 
-:Date: |today|
-:PDF: `sphinxcontrib-eagle.pdf <sphinxcontrib-eagle.pdf>`_
 
-Table of Contents
-------------------------
 
-.. toctree::
-   :maxdepth: 3
+About
+=====
 
-   readme
-   usage
 
-.. _Sphinx: http://sphinx.pocoo.org/latest
-.. _eagle: http://www.cadsoftusa.com/
+.. include:: ../README.rst
+
+.. include:: usage.rst
+
+
+
+

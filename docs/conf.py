@@ -1,12 +1,14 @@
-from path import path
+from path import Path
 from setuptools import find_packages
 import logging
+import sys
+import os
 
 
 def read_project_version(py=None, where='.', exclude=['bootstrap', 'pavement', 'doc', 'docs', 'test', 'tests', ]):
     if not py:
-        py = path(where) / find_packages(where=where, exclude=exclude)[0]
-    py = path(py)
+        py = Path(where) / find_packages(where=where, exclude=exclude)[0]
+    py = Path(py)
     if py.isdir():
         py = py / '__init__.py'
     __version__ = None
@@ -17,7 +19,7 @@ def read_project_version(py=None, where='.', exclude=['bootstrap', 'pavement', '
     return __version__
 
 release = read_project_version(
-    path('..').abspath() / 'sphinxcontrib' / 'eagle.py')
+    Path('..').abspath() / 'sphinxcontrib' / 'eagle.py')
 
 project = u'sphinxcontrib-eagle'
 copyright = u'2011, ponty'
@@ -25,13 +27,15 @@ author = 'ponty'
 
 
 # logging.basicConfig(level=logging.DEBUG)
+sys.path.insert(0, os.path.abspath('..'))
+
 
 needs_sphinx = '1.0'
 
 extensions = [
     #'sphinx.ext.intersphinx',
     'sphinxcontrib.eagle',
-    #'sphinx.ext.autodoc',
+    'sphinx.ext.autodoc',
     #'sphinxcontrib.programoutput',
     #'sphinx.ext.graphviz',
     #'sphinx.ext.autosummary',
@@ -67,7 +71,7 @@ latex_documents = [
 # remove blank pages from pdf
 # http://groups.google.com/group/sphinx-
 # dev/browse_thread/thread/92e19267d095412d/d60dcba483c6b13d
-latex_font_size = '10pt,oneside'
+#latex_font_size = '10pt,oneside'
 
 latex_elements = dict(
     papersize='a4paper',
